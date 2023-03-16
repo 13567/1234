@@ -7,6 +7,16 @@ import * as data from '../docs/data';
 
 dotenv.config();
 
+function getAlgoliaConfig(env: NodeJS.ProcessEnv) {
+  if (env.VITE_ALGOLIA_ID && env.VITE_ALGOLIA_KEY) {
+    return {
+      indexName: 'stackblitz',
+      appId: env.VITE_ALGOLIA_ID,
+      apiKey: env.VITE_ALGOLIA_KEY,
+    };
+  }
+}
+
 export default defineConfig({
   srcDir: 'docs',
   outDir: 'build',
@@ -121,12 +131,4 @@ function getHeadTags(env: NodeJS.ProcessEnv): HeadConfig[] {
   return tags;
 }
 
-function getAlgoliaConfig(env: NodeJS.ProcessEnv) {
-  if (env.VITE_ALGOLIA_ID && env.VITE_ALGOLIA_KEY) {
-    return {
-      indexName: 'stackblitz',
-      appId: env.VITE_ALGOLIA_ID,
-      apiKey: env.VITE_ALGOLIA_KEY,
-    };
-  }
-}
+
